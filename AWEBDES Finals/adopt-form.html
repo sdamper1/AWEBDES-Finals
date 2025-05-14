@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Adoption Form</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="form-page">
+  <nav class="navbar navbar-expand-lg navbar-dark">
+    <div class="container">
+      <a class="navbar-brand" href="#"><img src="images/logo.jpg" alt="Logo" class="logo-img"> Pet Haven</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="adoptable.html">Adoptable Pets</a></li>
+          <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container my-5">
+    <h2 class="text-center mb-4 text-white">Adoption Form</h2>
+    <div id="petInfo" class="text-center mb-4 text-white"></div>
+
+    <form class="needs-validation" novalidate>
+      <div class="mb-3">
+        <label for="name" class="form-label">Your Full Name</label>
+        <input type="text" class="form-control" id="name" required>
+        <div class="invalid-feedback">Please enter your name.</div>
+      </div>
+      <div class="mb-3">
+        <label for="email" class="form-label">Your Email</label>
+        <input type="email" class="form-control" id="email" required>
+        <div class="invalid-feedback">Please enter a valid email address.</div>
+      </div>
+      <div class="mb-3">
+        <label for="phone" class="form-label">Your Phone Number</label>
+        <input type="text" class="form-control" id="phone" required>
+        <div class="invalid-feedback">Please enter your phone number.</div>
+      </div>
+      <button type="submit" class="btn btn-primary">Submit Adoption Application</button>
+    </form>
+  </div>
+
+  <footer class="text-center text-white mt-5">
+    © 2025 Pet Haven. All rights reserved.
+  </footer>
+
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const petName = urlParams.get('petName');
+    const petId = parseInt(urlParams.get('petId'));
+    const petInfoDiv = document.getElementById('petInfo');
+    petInfoDiv.innerHTML = `<h4>You're about to adopt:</h4><p><strong>Pet Name:</strong> ${petName}</p>`;
+
+    const form = document.querySelector('form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Optional: Save adopted pet info
+      let adoptedPets = JSON.parse(localStorage.getItem("adoptedPets")) || [];
+      adoptedPets.push({ petId, petName });
+      localStorage.setItem("adoptedPets", JSON.stringify(adoptedPets));
+
+      // Remove pet from 'pets' list
+      let pets = JSON.parse(localStorage.getItem("pets")) || [];
+      pets = pets.filter(pet => pet.id !== petId);
+      localStorage.setItem("pets", JSON.stringify(pets));
+
+      // Redirect
+      window.location.href = "adoptable.html";
+    });
+
+    // Bootstrap validation
+    (() => {
+      'use strict';
+      const forms = document.querySelectorAll('.needs-validation');
+      Array.from(forms).forEach(form => {
+        form.addEventListener('submit', event => {
+          if (!form.checkValidity()) {
+            event.preventDefault();
+            event.stopPropagation();
+          }
+          form.classList.add('was-validated');
+        }, false);
+      });
+    })();
+  </script>
+</body>
+</html>

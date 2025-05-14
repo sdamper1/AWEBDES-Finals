@@ -1,0 +1,63 @@
+body {
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Ensure full height */
+}
+
+.home-page {
+    background-image: url('images/background1.jpg');
+}
+
+.adoptable-page {
+    background-image: url('images/background2.webp');
+}
+
+.about-page {
+    background-image: url('images/background5.jpg');
+}
+
+.form-page {
+    background-image: url('images/background2.webp');
+}
+
+.navbar {
+    background-color: rgba(0, 0, 0, 0.75);
+}
+
+.logo-img {
+    height: 40px;
+    width: 40px;
+    object-fit: cover;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.carousel-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 0 15px;
+}
+
+.carousel-img {
+    height: 400px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .carousel-img {
+        height: 250px;
+    }
+}
+
+footer {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    margin-top: auto;
+}
